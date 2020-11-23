@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ISO 10303-238</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<p class=pagehead>ISO 10303-238</p>
+
+<H1 ID="clause-K" CLASS="annex">Annex K<BR>(informative)<BR><BR>Change log</H1>
+
+
+<H2 ID="clause-K-1">K.1 Changes in second edition</H2>
+
+<p>The second edition includes specific changes based on experience
+accumulated from deployment of the first edition in the period
+2007-2020 and documented in TC184/SC4/WG15N2, as well as changes to
+harmonize with the latest edition of AP242 via shared references to
+the 1000-series parts of ISO 10303.  These changes include grammar
+fixes, wording fixes, and the following.</p>
+
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-measure">K.1.1 Changes in measure UoF</H3>
+
+<P>Change the <a href="clause4.htm#uof-measure">measure UoF</a> to
+reference application object definitions and mappings from ISO
+10303-1054, 10303-1106, 10303-1753, and 10303-1782 rather than define
+them in clause 4 and 5.  The names of some of the application objects
+have changed.</P>
+
+<UL>
+<LI>Area_measure becomes Area_data_element;</LI>
+<LI>Length_measure becomes Length_data_element;</LI>
+<LI>Mass_measure becomes Mass_data_element;</LI>
+<LI>Plane_angle_measure becomes Angle_data_element;</LI>
+<LI>Pressure_measure becomes Pressure_data_element;</LI>
+<LI>Rot_speed_measure becomes Frequency_data_element;</LI>
+<LI>Speed_measure becomes Velocity_data_element;</LI>
+<LI>Time_measure becomes Duration;</LI>
+<LI>Value_range remains Value_range;</LI>
+<LI>Value_with_unit remains Value_with_unit;</LI>
+<LI>Volume_measure becomes Volume_data_element.</LI>
+</UL>
+
+<P>Value_with_tolerance and Toleranced_length_measure become one of
+three different application objects depending on their use.
+Value_with_unit if no tolerance limits are applied,
+Value_with_tolerances for values with a plus/minus limit, and
+Qualified_numerical_item_with_unit for other limits.</P>
+
+<P>Limit_qualifier, Limits_and_fits, and Plus_minus_value become the
+value_qualifier of Qualified_numerical_item_with_unit or
+Dimension_value_with_limitation.</P>
+
+
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-project">K.1.2 Changes in project UoF</H3>
+
+<P>Rename the Project application object
+to <a href="clause4.htm#ao-manufacturing_project">Manufacturing_project</a>
+to avoid name conflict with 10303-1061.  Made a subtype of
+Product_version for ARM integration.  The mapping is unchanged but the
+prior its_id attribute is now covered by the inherited
+Product_version.id mapping.</P>
+
+<P>Replace the person_and_address application object with a reference
+to the Person_in_organization application object defined by ISO
+10303-1011.</P>
+
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-workpiece">K.1.3 Changes in workpiece UoF</H3>
+
+<P>Replace General_property, Part_property, and Process_property
+application objects with the Assigned_property application object
+defined by ISO 10303-1030.  Add workpiece, shape_element to the ARM
+definition for property assignment select.  The Process_property name
+has been reused for an application object defined by the Executable
+UoF that extends an Executable with additional information.</P>
+
+<P>Replace Hardness application object with the Hardness application
+object defined by ISO 10303-1110.  The integrated representation of
+this changed from a material_property_representation to a
+hardness_representation.</P>
+
+<P>Replace Material application object with the
+Material_identification application object defined by ISO 10303-1681.
+Add Workpiece, Cutting_component, Cutting_edge_properties to the ARM
+definition for material_item_select.</P>
+
+<P>Replace Material_property application object with the
+Material_property object defined by ISO 10303-1681.</P>
+
+<P>Replace the Property_parameter and Descriptive_parameter
+application objects with a reference to the Representation_item and
+String_representation_item objects defined by ISO 10303-1006.  Replace
+the Numeric_parameter application object with a reference to the
+Numerical_item_with_unit object defined by ISO 10303-1118.</P>
+
+<P>Replace Surface_property application object with the
+Surface_condition application object defined by ISO 10303-1110.</P>
+
+<P>Made <a href="clause4.htm#ao-workpiece">Workpiece</a> a subtype of
+Product_view_definition for ARM integration.  Mapping is unchanged but
+the previous its_id attribute is now given by the inherited
+Product_view_definition.id mapping.  The previous its_geometry
+attribute is now given by the inherited Product_view_definition
+primary_shape_representation.</P>
+
+<P>Replace <a href="clause4.htm#ao-workpiece">Workpiece</a>
+its_material parameter with an inverse attribute over
+Material_identification for ARM integration.  The integrated
+representation has not changed.</P>
+
+<P>Replace Workpiece_assembly_component application object with the
+Next_assembly_usage application object defined by ISO 10303-1026.  The
+Workpiece its_components parameter is now represented by the set of
+Next_assembly_usage application objects with a relating_view parameter
+that contains the Workpiece.  The integrated representation of this
+information is unchanged.</P>
+
+<P>Update support for product geometry types by changing AIC
+references to modules and adding other subtypes of the Geometric_model
+application object supported by ISO 10303-242.</P>
+
+<UL>
+<LI>ISO 10303-1501 replaces AIC 501 
+<LI>ISO 10303-1502 replaces AIC 502
+<LI>ISO 10303-1507 replaces AIC 507
+<LI>ISO 10303-1324 replaces AIC 508
+<LI>ISO 10303-1509 replaces AIC 509
+<LI>ISO 10303-1510 replaces AIC 510
+<LI>ISO 10303-1511 replaces AIC 511
+<LI>ISO 10303-1514 replaces AIC 514
+<LI>ISO 10303-1819 add Tessellated geometry
+<LI>ISO 10303-1831 add Scan data 3D shape
+</UL>
+
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-feature">K.1.4 Changes in manufacturing feature UoF</H3>
+
+<P>Move the Manufacturing_feature application object from
+the <a href="clause4.htm#uof-workpiece ">workpiece UoF</a> into the
+manufacturing feature UoF and reference the application object
+definitions and mappings from ISO 10303-1814 rather than define it in
+clause 4 and 5.</P>
+
+<P>Change the <a href="clause4.htm#uof-feature">manufacturing feature
+UoF</a> to reference the following feature application object
+definitions and mappings from ISO 10303-1814 rather than define them
+in clause 4 and 5.  Also remove definition in clause 5 for
+chamfer_requires_faces_or_features,
+edge_round_requires_faces_or_features,
+restrict_unneeded_feature_usage.  Some application objects have
+changed as noted below.</P>
+
+<UL>
+<LI>Angle_taper;</LI>
+<LI>Blind_bottom_condition;</LI>
+<LI>Boss;</LI>
+<LI>Catalogue_thread;</LI>
+<LI>Chamfer;</LI>
+<LI>Circular_closed_profile;</LI>
+<LI>Circular_closed_shape_profile;</LI>
+<LI>Circular_offset;</LI>
+<LI>Circular_omit;</LI>
+<LI>Circular_path;</LI>
+<LI>Circular_pattern;</LI>
+<LI>Closed_pocket;</LI>
+<LI>Closed_profile;</LI>
+<LI>Complete_circular_path;</LI>
+<LI>Compound_feature;</LI>
+<LI>Conical_hole_bottom;</LI>
+<LI>Counterbore_hole;</LI>
+<LI>Countersunk_hole;</LI>
+<LI>Defined_thread;</LI>
+<LI>Diameter_taper;</LI>
+<LI>Edge_round;</LI>
+<LI>Flat_hole_bottom;</LI>
+<LI>Flat_slot_end_type;</LI>
+<LI>Flat_with_radius_hole_bottom;</LI>
+<LI>General_closed_profile;</LI>
+<LI>General_outside_profile;</LI>
+<LI>General_path;</LI>
+<LI>General_pattern;</LI>
+<LI>General_pocket_bottom_condition;</LI>
+<LI>General_profile;</LI>
+<LI>General_profile_floor;</LI>
+<LI>General_shape_profile;</LI>
+<LI>Hole_bottom_condition;</LI>
+<LI>Linear_path;</LI>
+<LI>Linear_profile;</LI>
+<LI>Loop_slot_end_type;</LI>
+<LI>Machined_surface;</LI>
+<LI>Machining_feature;</LI>
+<LI>Ngon_profile;</LI>
+<LI>Open_pocket;</LI>
+<LI>Open_profile;</LI>
+<LI>Open_slot_end_type;</LI>
+<LI>Partial_area_definition;</LI>
+<LI>Partial_circular_path;</LI>
+<LI>Partial_circular_profile;</LI>
+<LI>Partial_circular_shape_profile;</LI>
+<LI>Planar_face;</LI>
+<LI>Planar_pocket_bottom_condition;</LI>
+<LI>Planar_profile_floor;</LI>
+<LI>Pocket;</LI>
+<LI>Pocket_bottom_condition;</LI>
+<LI>Profile;</LI>
+<LI>Profile_feature;</LI>
+<LI>Profile_floor;</LI>
+<LI>Radiused_pocket_bottom_condition;</LI>
+<LI>Radiused_slot_end_type;</LI>
+<LI>Rectangular_closed_profile;</LI>
+<LI>Rectangular_closed_shape_profile;</LI>
+<LI>Rectangular_offset;</LI>
+<LI>Rectangular_omit;</LI>
+<LI>Rectangular_open_shape_profile;</LI>
+<LI>Rectangular_pattern;</LI>
+<LI>Region;</LI>
+<LI>Region_projection;</LI>
+<LI>Region_surface_list;</LI>
+<LI>Replicate_feature;</LI>
+<LI>Round_hole;</LI>
+<LI>Rounded_end;</LI>
+<LI>Rounded_u_profile;</LI>
+<LI>Shape_profile;</LI>
+<LI>Slot;</LI>
+<LI>Slot_end_type;</LI>
+<LI>Specification;</LI>
+<LI>Specification_usage_constraint;</LI>
+<LI>Spherical_cap;</LI>
+<LI>Spherical_hole_bottom;</LI>
+<LI>Square_u_profile;</LI>
+<LI>Step;</LI>
+<LI>Surface_texture_parameter;</LI>
+<LI>Tee_profile;</LI>
+<LI>Thread;</LI>
+<LI>Through_bottom_condition;</LI>
+<LI>Through_pocket_bottom_condition;</LI>
+<LI>Through_profile_floor;</LI>
+<LI>Toolpath_feature;</LI>
+<LI>Topological_region;</LI>
+<LI>Transition_feature;</LI>
+<LI>Travel_path;</LI>
+<LI>Two5d_manufacturing_feature is now Manufacturing_feature;</LI>
+<LI>Vee_profile;</LI>
+<LI>Woodruff_slot_end_type.</LI>
+</UL>
+
+<P>Delete the turning feature UoF, moving the following application
+objects to the <a href="clause4.htm#uof-feature">manufacturing feature
+UoF</a>. Reference the definitions and mappings from ISO 10303-1814
+rather than define them in clause 4 and 5.  The names of some
+application objects have changed.</P>
+
+<UL>
+<LI>Diagonal_knurl;</LI>
+<LI>Diamond_knurl;</LI>
+<LI>General_revolution;</LI>
+<LI>Groove;</LI>
+<LI>Knurl;</LI>
+<LI>Outer_diameter;</LI>
+<LI>Outer_diameter_to_shoulder;</LI>
+<LI>Outer_round;</LI>
+<LI>Revolved_feature;</LI>
+<LI>Revolved_flat;</LI>
+<LI>Revolved_round;</LI>
+<LI>Straight_knurl;</LI>
+<LI>Tool_knurl is now Catalogue_knurl;</LI>
+<LI>Turning_feature.</LI>
+</UL>
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-executable">K.1.5 Changes in executable UoF</H3>
+
+<P>Replace Boolean_expression application object and all subtypes with
+the objects of the same name defined by ISO 10303-1526.  These objects
+were originally defined by ISO 13584-20 and are equivalent.</P>
+
+<P>Make the <a href="clause4.htm#ao-executable">Executable</a>
+application object an ARM subtype of Process_operation_definition to
+further interoperation with AP242 process plans.  The integrated
+representation of this information is unchanged from previous edition
+of this document, but the AIM action_method subtype process_operation
+was inserted as an intermediate supertype
+of <a href="clause5.htm#aim-machining_process_executable">machining_process_executable</a>
+to facilitate interoperation.</P>
+
+<P>Expand <a href="clause4.htm#ao-executable">Executable</a> with
+"enabled" attribute to permit any process element to be marked as
+enabled or disabled.  </P>
+
+<P>Expand <a href="clause4.htm#ao-executable">Executable</a> with
+as-is, to-be, and removal Product_view_definition objects.  Delete the
+In_process_geometry application object and references
+from <a href="clause4.htm#ao-machining_workingstep">Machining_workingstep</a>,
+<a href="clause4.htm#ao-turning_workingstep">Turning_workingstep</a>,
+and <a href="clause4.htm#ao-workplan">Workplan</a>.  In-process
+geometry changed from an advanced_brep_shape_representation to
+Product_view_definition so that features and tolerances can also be
+provided with the geometry and topology.
+
+<P>Expand <a href="clause4.htm#ao-executable">Executable</a> with
+twin_source, twin_plan, twin_start, twin_end, twin_exception, and
+twin_worktime parameters to describe a digital twin process.
+Added <a href="clause5.htm#aim-machining_twin_relationship">machining_twin_relationship</a>
+to clause 5 for use in the mapping and guidance
+on <A href="clause5.htm#funcon-twin-process">Digital twin process</A>
+in the Fundamental concepts and assumptions section.</P>
+
+
+<P>Rename <a href="clause4.htm#ao-extended_nc_function">Extended_NC_function</a>
+property from "description" to "extended_description" to avoid
+conflict with the "description" property inherited from the
+Process_operation_definition supertype added to Executable.  The
+integrated representation of this information is unchanged.</P>
+
+
+<P>Add <a href="clause4.htm#ao-feature_complete_probing">Feature_complete_probing</a>
+application object to describe complete measurement cycle for
+inspecting a feature.</P>
+
+<P>Add <a href="clause4.htm#ao-fixture_usage">Fixture_usage</a>
+definition to identify a particular usage of a fixture and associate a
+product model for the
+fixture. Added <a href="clause5.htm#aim-machining_fixture_usage">machining_fixture_usage</a>
+to clause 5 for use in the mapping.  This replaces the first edition
+extension to Executable that referenced a workpiece directly as the
+its_fixture.</P>
+
+<P>Add <a href="clause4.htm#ao-machine_usage">Machine_usage</a>
+application object to record actual machine tool used for an
+executable. Mappings
+use <a href="clause5.htm#aim-machining_machine_usage">machining_machine_usage</a>
+and <a href="clause5.htm#aim-machining_usage_relationship">machining_usage_relationship</a>
+AIM objects</P>
+
+<P>Add <a href="clause4.htm#ao-machine_with_kinematics">Machine_with_kinematics</a>
+application object as a Product_view_definition with an associated
+kinematics representation.</P>
+
+
+<P>Add <a href="clause4.htm#ao-process_property">Process_property</a>
+subtype of Activity_property for supplemental information about a
+process description.  The Process_property application object defined
+by the first edition has been replaced by the Assigned_property
+application object defined by ISO 10303-1030.</P>  Mapping
+uses <a href="clause5.htm#aim-machining_process_property">machining_process_property</a>
+AIM object.</P>
+
+
+<P>Expand <a href="clause4.htm#ao-setup">Setup</a> to reference
+a <a href="clause4.htm#ao-fixture_usage">Fixture_usage</a> as
+"its_fixture_usage".
+
+<P>Expand <a href="clause4.htm#ao-tool_usage">Tool_usage</a>
+definition to include gage and tool-end placements, which clarify how
+the tool product model is oriented with respect to toolpaths and
+machine models for simulation and interference checking.</P>
+
+<P>Change <a href="clause4.htm#ao-touch_probe">Touch_probe</a> to be a
+type of <a href="clause4.htm#ao-machining_tool">Machining_tool</a>, to
+support a description of the probe usage, associated geometric shape,
+and other product information available for tools.  Add values for
+"overall assembly length" and "ball radius" to describe basic
+parameters.</P>
+
+<P>Change the supertype list of
+the <a href="clause4.htm#ao-touch_probing">Touch_probing</a>
+and <a href="clause4.htm#ao-rapid_movement">Rapid_movement</a>
+application objects to only contain Operation.  As defined by ISO
+14649 they were also a Workingstep, which caused confusion in usage.
+The same change is made to
+<a href="clause5.htm#aim-machining_touch_probing">machining_touch_probing</a>
+and
+<a href="clause5.htm#aim-machining_rapid_movement">machining_rapid_movement</a>.</P>
+
+
+
+<P>Expand <a href="clause4.htm#ao-workplan">Workplan</a> with toolpath
+placement, referenced as "toolpath_orientation", to allow reuse of
+nested workplans or workingsteps in different locations.  This
+information was previously only available on Machining_workingstep.</P>
+
+
+<P>Change the supertype
+of <a href="clause5.htm#aim-machining_process_executable">machining_process_executable</a>
+to process_operation, which is also an action_method subtype, to
+further interoperation with AP242.  Previously, process_operation had
+local rules WR1 and WR2 which were incompatible with AP238 usage, but
+this have since been removed.</P>
+
+<P>Change mappings for properties that use the ISO 13584-20 expression
+types.  This includes NC_constant, NC_variable, and references to
+boolean expression by if and while statement application objects.  Map
+to expression_item_representation_item defined by ISO 10303-61, which
+refers to the expression via an "item" attribute.  Retire previous
+mapping to a complex instance of expression with the locally defined
+expression_representation_item type.  The reference path in the
+previous edition began as follows.
+
+<PRE class="note">expression_representation_item &lt;=
+generic_expression =&gt;
+expression =&gt;
+[ rest of mapping ]</PRE>
+
+<p>This is changed to the following.
+
+<PRE class="note">expression_item_representation_item
+expression_item_representation_item.item -&gt;
+expression_element
+expression_element = expression
+expression =&gt;
+[ rest of mapping ]</PRE>
+
+<p>Adjust definition of nc_variable_compatible_initial_value for the
+new mapping.  The expression_representation_item definition has been
+retained in the AIM EXPRESS for compatibility with data sets created
+under previous editions.
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-operation">K.1.6 Changes in operation UoF</H3>
+
+<P>Add <a href="clause4.htm#ao-extended_operation">Extended_operation</a>
+to permit use with process descriptions not described by ISO 14649-11,
+ISO 14649-12, and ISO 14649-17.  </P>
+
+<P>Add <a href="clause5.htm#extended_type_operation">extended_type_operation</a>
+to clause 5 to support mapping of Extended_operation. </P>
+
+
+<P>Extend <a href="clause4.htm#ao-machine_functions">Machine_functions</a>
+with an other_functions attribute that consolidates
+Am_machine_functions.functions,
+Milling_machine_functions.other_functions, and
+Turning_machine_functions.other_functions into a single place for
+consistent handling.  Also simplified the mapping to eliminate an
+unneeded set_representation_item.
+
+<P>Moved the its_id attribute
+from <a href="clause4.htm#ao-machining_operation">machining_operation</a>
+to the supertype <a href="clause4.htm#ao-operation">operation</a> so
+that additive operations, touch probing, and extended operations can
+also be identified.</P>
+
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-toolpath">K.1.7 Changes in toolpath UoF</H3>
+
+<P>Expand <a href="clause4.htm#ao-cutter_contact_trajectory">Cutter_contact_trajectory</a>
+and <a href="clause4.htm#ao-cutter_location_trajectory">Cutter_location_trajectory</a>
+with a toolpath reference direction curve to describe the orientation
+of asymmetric tools.  This is analogous to the way in which ISO 10303
+geometry placements are described using an axis direction as well as a
+reference direction.</P>
+
+<P>Expand <a href="clause4.htm#ao-trajectory">Trajectory</a> (the
+supertype of all toolpaths) with cross section parameters for a more
+detailed representation of tool contact area than the depth and
+overcut parameters can provide to better support speed and feed
+optimization for machining operations.</P>
+
+<P>Add <a href="clause5.htm#aim-via_arc_point">via_arc_point</a>
+and <a href="clause5.htm#aim-via_helix_point">via_helix_point</a> to
+clause 5 to support high-speed milling operations. </P>
+
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-milling_process">K.1.8 Changes in process data for milling UoF</H3>
+
+<p>No change.
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-milling_tools">K.1.9 Changes in cutting tools for milling UoF</H3>
+
+<P>Replace <a href="clause4.htm#ao-cutting_component">Cutting_component</a>
+its_material parameter with an inverse attribute over
+Material_identification for ARM integration.  The integrated
+representation has not changed.</P>
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-turning_process">K.1.10 Changes in process data for turning UoF</H3>
+
+<P>Expand <a href="clause4.htm#ao-turning_workingstep">Turning_workingstep</a>
+with toolpath placement, referenced as "toolpath_orientation", to
+allow reuse of the toolpaths of an operation in a different location.
+This information was previously only available on
+Machining_workingstep.</P>
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-turning_tools">K.1.11 Changes in cutting tools for turning UoF</H3>
+
+<P>Replace <a href="clause4.htm#ao-cutting_edge_properties">Cutting_edge_properties</a>
+its_material parameter with an inverse attribute over
+Material_identification for ARM integration.  The integrated
+representation has not changed.</P>
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-additive_process">K.1.12 Changes in process data for additive manufacturing UoF</H3>
+
+<P>Add new <A href="clause4.htm#uof-additive_process">process data for additive
+manufacturing UoF</A> which describes the machining actions defined by
+ISO 14649-17, with application object definitions and mappings for the
+following objects.
+
+<UL>
+<LI><a href="clause4.htm#ao-am_compound_feature">Am_compound_feature</A>;</LI>
+<LI><a href="clause4.htm#ao-am_construction">Am_construction</A>;</LI>
+<LI><a href="clause4.htm#ao-am_feature">Am_feature</A>;</LI>
+<LI><a href="clause4.htm#ao-am_gradient_feature">Am_gradient_feature</A>;</LI>
+<LI><a href="clause4.htm#ao-am_heterogenuous_atom">Am_heterogenuous_atom</A>;</LI>
+<LI><a href="clause4.htm#ao-am_heterogenuous_feature">Am_heterogenuous_feature</A>;</LI>
+<LI><a href="clause4.htm#ao-am_infill">Am_infill</A>;</LI>
+<LI><a href="clause4.htm#ao-am_machine_functions">Am_machine_functions</A>;</LI>
+<LI><a href="clause4.htm#ao-am_oned_operation">Am_oned_operation</A>;</LI>
+<LI><a href="clause4.htm#ao-am_operation">Am_operation</A>;</LI>
+<LI><a href="clause4.htm#ao-am_simple_feature">Am_simple_feature</A>;</LI>
+<LI><a href="clause4.htm#ao-am_solid">Am_solid</A>;</LI>
+<LI><a href="clause4.htm#ao-am_twod_operation">Am_twod_operation</A>;</LI>
+<LI><a href="clause4.htm#ao-am_workingstep">Am_workingstep</A>;</LI>
+<LI><a href="clause4.htm#ao-am_workpiece">Am_workpiece</A>.</LI>
+</UL>
+
+<P>Add <a href="clause5.htm#additive_type_operation">additive_type_operation</a>
+to clause 5 to support mapping of Am_operation and subtypes. </P>
+
+
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-gdt">K.1.13 Changes in geometric dimensioning and tolerancing UoF</H3>
+
+<P>Change the <a href="clause4.htm#uof-gdt">geometric dimensioning and
+tolerancing UoF</a> to reference the following feature application
+object definitions and mappings from ISO 10303-1050 and ISO 10303-1051
+rather than define them in clause 4 and 5.  Also reference default
+tolerance application object definitions in ISO 10303-1052.</P>
+
+<UL>
+<LI>Angular_location_dimension;</LI>
+<LI>Angular_size_dimension;</LI>
+<LI>Angularity_tolerance;</LI>
+<LI>Circular_runout_tolerance;</LI>
+<LI>Coaxiality_tolerance;</LI>
+<LI>Common_datum;</LI>
+<LI>Concentricity_tolerance;</LI>
+<LI>Curved_distance_dimension;</LI>
+<LI>Curved_size_dimension;</LI>
+<LI>Cylindricity_tolerance;</LI>
+<LI>Datum;</LI>
+<LI>Datum_defined_by_derived_shape;</LI>
+<LI>Datum_defined_by_feature;</LI>
+<LI>Datum_defined_by_targets;</LI>
+<LI>Datum_reference;</LI>
+<LI>Datum_target;</LI>
+<LI>Diameter_size_dimension;</LI>
+<LI>Externally_defined_size_dimension;</LI>
+<LI>Flatness_tolerance;</LI>
+<LI>Geometric_dimension;</LI>
+<LI>Geometric_tolerance;</LI>
+<LI>Geometric_tolerance_relationship;</LI>
+<LI>Height_size_dimension;</LI>
+<LI>Length_size_dimension;</LI>
+<LI>Line_profile_tolerance;</LI>
+<LI>Linear_distance_dimension;</LI>
+<LI>Location_dimension;</LI>
+<LI>Measurement_path;</LI>
+<LI>Parallelism_tolerance;</LI>
+<LI>Perpendicularity_tolerance;</LI>
+<LI>Placed_target;</LI>
+<LI>Position_tolerance;</LI>
+<LI>Projection;</LI>
+<LI>Radial_size_dimension;</LI>
+<LI>Roundness_tolerance;</LI>
+<LI>Single_datum;</LI>
+<LI>Size_dimension;</LI>
+<LI>Straightness_tolerance;</LI>
+<LI>Surface_profile_tolerance;</LI>
+<LI>Symmetry_tolerance;</LI>
+<LI>Target_area;</LI>
+<LI>Target_circle;</LI>
+<LI>Target_point;</LI>
+<LI>Target_rectangle;</LI>
+<LI>Target_straight_line;</LI>
+<LI>Thickness_size_dimension;</LI>
+<LI>Tolerance_condition;</LI>
+<LI>Tolerance_zone;</LI>
+<LI>Tolerance_zone_definition;</LI>
+<LI>Total_runout_tolerance;</LI>
+<LI>Width_size_dimension.</LI>
+</UL>
+
+<P>Remove definitions in clause 5 for directed_dimensional_location,
+externally_defined_dimension_definition, and
+placed_datum_target_feature.</P>
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-library_reference">K.1.14 Changes in library reference UoF</H3>
+
+<P>Replace the entire library reference UoF with references to
+appropriate module definitions.
+
+<P>Externally_defined_representation is now defined by ISO 10303-1779.
+Library_property_value is now External_representation_item defined by
+ISO 10303-1779.</P>
+
+<P>Library_part_assignment is now External_source from ISO
+10303-1331.
+
+<P>Property_BSU is replaced by Plib_property_reference defined by ISO
+10303-1129.  Class_BSU and Supplier_BSU are now Plib_class_reference
+defined by ISO 10303-1291. The BSU application object was an abstract
+supertype and is not longer used.</P>
+
+
+
+<!-- ============================== -->
+<H3 ID="clause-K-1-management">K.1.15 Changes in management UoF</H3>
+
+<P>Replace Approval, Approval_relationship, Approval_status, and
+Approving_person_organization application object definitions and
+mappings with references to the definitions with the same names in ISO
+10303-1012.  The integrated representation of this information is
+unchanged.</P>
+
+<P>Replace the Assigned_date and Assigned_time application object
+definitions and mappings with a reference to the
+Date_or_date_time_assignment definition in ISO 10303-1014.  The
+integrated representation of this information is unchanged.</P>
+
+<P>Replace the Assigned_organization and Assigned_person application
+object definitions and mappings with a reference to the
+Organization_or_person_in_organization_assignment definition in ISO
+10303-1013.  The integrated representation of this information is
+unchanged.
+
+<P>Made <A href="#ao-last_modified_timestamp">Last_modified_timestamp</A>
+a subtype of Date_or_date_time_assignment for ARM integration.  The
+date_and_time_value and items data defined by the previous edition of
+this document are now given by the assigned_date and items data
+defined by Date_or_date_time_assignment.  The integrated
+representation of this information is unchanged.</P>
+
+
+<P>Replace the Security_classification and
+Security_classification_assignment application object definitions and
+mappings with references to the definitions with the same names in ISO
+10303-1015.  The integrated representation of this information is
+unchanged.</P>
+
+
+<p class=pagefoot>&copy; ISO 2020 &mdash; All rights reserved
+</body>
+</html>
+
